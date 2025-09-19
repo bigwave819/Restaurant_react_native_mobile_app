@@ -1,3 +1,5 @@
+export const API_URL = "http://10.115.44.76:7000/api"
+
 import arrowBack from "../assets/icons/arrow-back.png";
 import arrowDown from "@/assets/icons/arrow-down.png";
 import arrowRight from "@/assets/icons/arrow-right.png";

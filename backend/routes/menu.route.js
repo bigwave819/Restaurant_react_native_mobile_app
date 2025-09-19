@@ -1,10 +1,10 @@
 import express from "express"
-import { createCategory, getCategory } from "../controller/category.controller.js"
+import { createMenu, getMenu } from "../controller/menu.controller.js"
 
 const router = express.Router()
 
 
-router.post("/create", createCategory)
-router.get('/get', getCategory)
+router.post("/create", createMenu)
+router.get('/get', getMenu)
 
 export default router

@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const menuModel = mongoose.model({
+const menuModel = new mongoose.Schema({
     name: {
         type: String,
         required: true,
@@ -13,14 +13,8 @@ const menuModel = mongoose.model({
         type: Number,
         required: true,
     },
-    calories: {
-        type: String,
-        required: true,
-    },
-    proteins: {
-        type: String,
-        required: true,
-    },
+    calories: { type: Number, required: true },
+    protein: { type: Number, required: true },
     category: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
@@ -31,4 +25,6 @@ const menuModel = mongoose.model({
     }
 }, { timestamps: true })
 
-export default menuModel;
+const Menu = mongoose.model('Menu', menuModel)
+
+export default Menu;

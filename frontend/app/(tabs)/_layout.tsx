@@ -1,10 +1,9 @@
 
 
-import { View, Text } from 'react-native'
+import { View, Text, Image } from 'react-native'
 import React from 'react'
 import { Tabs } from 'expo-router'
 import { TabBarIconProps } from "@/types"
-import { Image } from 'expo-image'
 import { images } from '@/constants'
 import cn from "clsx"
 import "../globals.css"
@@ -12,7 +11,7 @@ import "../globals.css"
 
 export const TabBarIcon = ({ focused, icon, title } : TabBarIconProps) => (
     <View className='tab-icon'>
-        <Image source={icon} className="size-7" contentFit='contain' tintColor={focused ? '#FE8C00' : '5D5F6D'} />
+        <Image source={icon} className="size-7" resizeMode='contain' tintColor={focused ? '#FE8C00' : '5D5F6D'} />
         <Text className={cn(`text-sm font-bold`, focused ? 'text-primary' : 'text-gray-200')}>
             {title}
         </Text>

@@ -1,8 +1,7 @@
 
 
-import { View, Text, TouchableOpacity } from 'react-native'
+import { View, Text, TouchableOpacity, Image } from 'react-native'
 import React from 'react'
-import { Image } from 'expo-image'
 import { images } from '@/constants'
 
 const cartButton = () => {

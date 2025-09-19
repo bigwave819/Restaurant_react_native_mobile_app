@@ -76,8 +76,8 @@ export const getMenu = async (req, res) => {
     try {
         const menu = await Menu.find()
 
-        if (menu.lenght == 0) {
-            return res.status(404).json({ message: "All fields are required" })
+        if (menu.length === 0) { // Fixed: changed "lenght" to "length"
+            return res.status(404).json({ message: "Menu is empty" }) // Changed message to be more appropriate
         }
 
         return res.status(200).json({
