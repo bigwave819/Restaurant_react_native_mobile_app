@@ -13,7 +13,6 @@ export async function fetchMenu() {
         }
         
         const data = await response.json();
-        console.log("API response received:", data);
         
         if (data.menu && Array.isArray(data.menu)) {
             return data.menu;

@@ -1,6 +1,6 @@
 
 
-import { View, Text, TouchableOpacity, Image } from 'react-native'
+import { Text, TouchableOpacity, Image, Platform } from 'react-native'
 
 
 type MenuCardProps = {
@@ -11,7 +11,7 @@ type MenuCardProps = {
 
 const menuCard = ({ name, price, imageUrl }: MenuCardProps) => {
   return (
-    <TouchableOpacity className='menu-card'>
+    <TouchableOpacity className='menu-card' style={Platform.OS === 'android' ? { elevation: 10, shadowColor: "#878787" } : { }}>
         <Image 
             source={{ uri: imageUrl }} 
             className='size-32 absolute -top-10' 

@@ -74,3 +74,19 @@ export const logIn = async (req, res) => {
         })
     }
 }
+
+export const getUser = async(_, res) => {
+    try {
+        const user = await User.find()
+
+        if (user.length === 0) {
+            return res.status(404).json({ message: 'no User found' })
+        }
+
+        return res.status(200).json(user)
+    } catch (error) {
+        return res.status(500).json({
+            message: `the server error is ${error.message}`
+        })
+    }
+}

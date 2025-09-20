@@ -16,8 +16,9 @@ const menuModel = new mongoose.Schema({
     calories: { type: Number, required: true },
     protein: { type: Number, required: true },
     category: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Category", 
+      required: true,
     },
     imageUrl: {
         type: String,

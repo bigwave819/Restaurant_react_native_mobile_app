@@ -73,20 +73,21 @@ export const createMenu = async (req, res) => {
 }
 
 export const getMenu = async (req, res) => {
-    try {
-        const menu = await Menu.find()
+  try {
+    const menu = await Menu.find().populate("category");
 
-        if (menu.length === 0) { // Fixed: changed "lenght" to "length"
-            return res.status(404).json({ message: "Menu is empty" }) // Changed message to be more appropriate
-        }
-
-        return res.status(200).json({
-            message: "Here is Your menu",
-            menu
-        })
-    } catch (error) {
-        return res.status(500).json({
-            message: `error is ${error.message}`
-        })
+    if (menu.length === 0) {
+      return res.status(404).json({ message: "Menu is empty" });
     }
-}
+
+    return res.status(200).json({
+      message: "Here is Your menu",
+      menu,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: `error is ${error.message}`,
+    });
+  }
+};
+
