@@ -22,9 +22,17 @@ const Search = () => {
   // fetch menu
   useEffect(() => {
     (async () => {
-      const data = await fetchMenu();
-      setMenu(data);
-      setLoading(false);
+      try {
+        const data = await fetchMenu();
+        console.log('API Response data:', data);
+        console.log('First menu item:', data[0]);
+        console.log('First item ID:', data[0]?._id);
+        setMenu(data);
+      } catch (error) {
+        console.error('Error fetching menu:', error);
+      } finally {
+        setLoading(false);
+      }
     })();
   }, []);
 
@@ -52,12 +60,26 @@ const Search = () => {
     return matchesCategory && matchesSearch;
   });
 
+  console.log('Filtered menu count:', filteredMenu.length);
+  console.log('First filtered item:', filteredMenu[0]);
+
   return (
     <SafeAreaView>
       <FlatList
-        data={filteredMenu} // 👈 use filteredMenu
+        data={filteredMenu}
         renderItem={({ item, index }) => {
           const isFirstColRightItem = index % 2 === 0;
+          
+          // Add validation for the item
+          if (!item._id) {
+            console.warn('Menu item missing _id:', item);
+            return (
+              <View className={cn("flex-1 max-w-[48%]", !isFirstColRightItem ? "mt-10" : "mt-0")}>
+                <Text className="text-red-500">Invalid item: Missing ID</Text>
+              </View>
+            );
+          }
+
           return (
             <View
               className={cn(
@@ -66,6 +88,7 @@ const Search = () => {
               )}
             >
               <MenuCard
+                id={item._id}
                 name={item.name}
                 price={item.price}
                 imageUrl={item.imageUrl}
@@ -73,7 +96,7 @@ const Search = () => {
             </View>
           );
         }}
-        keyExtractor={(item) => item._id || item.$id}
+        keyExtractor={(item) => item._id || `item-${Math.random()}`}
         numColumns={2}
         columnWrapperClassName="gap-7"
         contentContainerClassName="gap-7 px-5 pb-32"
@@ -94,7 +117,11 @@ const Search = () => {
             <Filter categories={categories} />
           </View>
         )}
-        ListEmptyComponent={() => !loading && <Text>No Result</Text>}
+        ListEmptyComponent={() => !loading && (
+          <View className="flex-1 justify-center items-center py-10">
+            <Text className="text-gray-500 text-lg">No items found</Text>
+          </View>
+        )}
       />
     </SafeAreaView>
   );
